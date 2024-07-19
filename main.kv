@@ -1,0 +1,2890 @@
+#:kivy 2.0
+#:import Factory kivy.factory.Factory
+
+WindowManager:
+    MenuScreen:
+    ChoixScreen:
+    FacileScreen:
+    Exo2Screen:
+
+
+<MenuScreen>:
+    name: 'menu'
+    Image:
+        source: "fond.jpg"
+        allow_stretch: True
+        keep_ratio: False
+    GridLayout:
+        cols :1
+        rows: 3
+        padding: self.width/10
+        spacing: self.height/10
+        Button:
+            text: "Jouer"
+            halign: "center"
+            background_color: "#F00000"
+            size_hint: .5, .1
+            font_size: self.width/15
+            on_release:
+                app.root.current = 'choix'
+                app.root.transition.direction = 'left'
+        Button:
+            text: "Règles"
+            halign: "center"
+            background_color: "#F00000"
+            size_hint: .5, .1
+            font_size: self.width/15
+            on_release:
+                Factory.Rules().open()
+        Button:
+            text: "Crédits"
+            halign: "center"
+            background_color: "#F00000"
+            size_hint: .5, .1
+            font_size: self.width/15
+            on_release:
+                Factory.Credits().open()
+
+
+<ChoixScreen>:
+    name: 'choix'
+    Image:
+        source: "fond.jpg"
+        allow_stretch: True
+        keep_ratio: False
+    GridLayout:
+        cols: 2
+        rows: 3
+        padding: self.width/10
+        spacing: self.height/10
+        Button:
+            text: "Facile"
+            halign: "center"
+            background_color: "#F00000"
+            size_hint: .5, .1
+            font_size: self.width/15
+            on_release:
+                root.diffic = "facile"
+                app.root.current = 'facile'
+                app.root.transition.direction = 'left'
+                Factory.NameRequest().open()
+        Button:
+            text: "Avancé"
+            halign: "center"
+            background_color: "#F00000"
+            size_hint: .5, .1
+            font_size: self.width/15
+            on_release:
+                root.diffic = "autodidacte"
+                Factory.NameRequest().open()
+                app.root.current = 'facile'
+                app.root.transition.direction = 'left'
+        Button:
+            text: "Moyen"
+            halign: "center"
+            background_color: "#F00000"
+            size_hint: .5, .1
+            font_size: self.width/15
+            on_release:
+                root.diffic = "moyen"
+                Factory.NameRequest().open()
+                app.root.current = 'facile'
+                app.root.transition.direction = 'left'
+        Button:
+            text: "2 joueurs"
+            halign: "center"
+            background_color: "#F00000"
+            size_hint: .5, .1
+            font_size: self.width/15
+            on_release:
+                Factory.Devmt().open()
+        Button:
+            text: "Difficile"
+            halign: "center"
+            background_color: "#F00000"
+            size_hint: .5, .1
+            font_size: self.width/15
+            on_release:
+                root.diffic = "difficile"
+                Factory.NameRequest().open()
+                app.root.current = 'facile'
+                app.root.transition.direction = 'left'
+        Button:
+            text: "Retour"
+            halign: "center"
+            background_color: "#F00000"
+            size_hint: .5, .1
+            font_size: self.width/15
+            on_release:
+                app.root.current = 'menu'
+                app.root.transition.direction = 'right'
+
+<Rules>:
+    auto_dismiss: True
+    title: "Règles du jeu"
+    size_hint: .7, .75
+    title_align: 'center'
+    title_size: self.width/30
+    BoxLayout:
+        padding: self.height/20
+        spacing: self.width/15
+        orientation: 'vertical'
+        Label:
+            font_size: self.width/35
+            halign: 'center'
+            text: "But du jeu :\n \n \nIl vous faut positionner vos navires stratégiquement pour éviter\nqu’ils ne se fassent détruire par votre adversaire.\n \nDès que la bataille commence vous allez chacun votre tour cibler une\ncase de la grille adverse pour essayer de toucher les navires de l’adversaire.\n \nLe but est de couler tous les navires de l’ennemi avant qu’il ne coule les vôtres !\n \nVous avez 5 navires de tailles différentes à positionner\n et vous pouvez jouer selon 4 difficultés différentes.\n \nBon jeu à vous !"
+
+<Credits>:
+    auto_dismiss: True
+    title: "Crédits"
+    size_hint: .7, .5
+    title_align: 'center'
+    title_size: self.width/30
+    BoxLayout:
+        padding: self.height/20
+        spacing: self.width/15
+        orientation: 'vertical'
+        Label:
+            font_size: self.width/35
+            halign: 'center'
+            text: "Ce jeu à été développé par Romain JAUGEY et Arne JACOBS,\nélèves en première année à l’ENSTA Bretagne,\nécole d’ingénieur pluridisciplinaire.\n \n \nNous espérons que le jeu vous a plu ou vous plaira\net n’hésitez pas à nous suivre sur LinkedIn\npour nous donner vos retours."
+
+<Devmt>:
+    auto_dismiss: True
+    title: "En développement"
+    title_align: 'center'
+    title_size: self.width/30
+    size_hint: .7, .4
+    BoxLayout:
+        padding: self.height/20
+        spacing: self.width/15
+        orientation: 'vertical'
+        Label:
+            font_size: self.width/35
+            halign: 'center'
+            text: "Attendez la prochaine mise à jour\npour débloquer ce mode de jeu !"
+
+<NameRequest>:
+    auto_dismiss: False
+    title: "Entrez votre nom !"
+    size_hint: .6, .3
+    title_align: 'center'
+    title_size: self.width/30
+    BoxLayout:
+        padding: self.height/20
+        spacing: self.width/15
+        orientation: 'vertical'
+        TextInput:
+            multiline: False
+            size_hint: .6, .9
+            pos_hint: {'center_x': .5}
+            center_x: .5
+            id: txtinput
+            hint_text: 'Pseudo'
+            hint_text_color: "#606060"
+            font_size: self.height/2
+
+        Button:
+            size_hint: .6, .9
+            text: "Valider"
+            pos_hint: {'center_x': .5}
+            on_release:
+                root.set_pseudo()
+                root.dismiss()
+
+
+<Abandon>:
+    auto_dismiss: True
+    title: "Abandon"
+    size_hint: .6, .3
+    title_align: 'center'
+    title_size: self.width/30
+    BoxLayout:
+        padding: self.height/20
+        spacing: self.width/15
+        orientation: 'vertical'
+        Label:
+            font_size: self.width/35
+            halign: 'center'
+            text: "Voulez-vous abandonner ?"
+        BoxLayout
+            padding: self.height/20
+            spacing: self.width/15
+            orientation: 'horizontal'
+            Button:
+                size_hint: .6, .9
+                text: "Oui"
+                pos_hint: {'center_x': .5}
+                on_release:
+                    app.root.current = 'menu'
+                    root.dismiss()
+
+            Button:
+                size_hint: .6, .9
+                text: "Non"
+                pos_hint: {'center_x': .5}
+                on_release:
+                    root.dismiss()
+
+
+<Winending>:
+    auto_dismiss: False
+    title: "La partie est finie"
+    title_align: 'center'
+    title_size: self.width/30
+    size_hint: .6, .3
+    BoxLayout:
+        padding: self.height/20
+        spacing: self.width/15
+        orientation: 'vertical'
+        Label:
+            text: "Vous avez gagné !"
+            font_size: self.width/35
+            halign: 'center'
+        BoxLayout
+            padding: self.height/20
+            spacing: self.width/15
+            orientation: 'horizontal'
+            Button:
+                size_hint: .6, .9
+                text: "Rejouer"
+                pos_hint: {'center_x': .5}
+                on_release:
+                    app.root.current = 'facile'
+                    root.dismiss()
+
+            Button:
+                size_hint: .6, .9
+                text: "Menu"
+                pos_hint: {'center_x': .5}
+                on_release:
+                    app.root.current = 'menu'
+                    root.dismiss()
+
+
+<Loseending>:
+    auto_dismiss: False
+    title: "La partie est finie"
+    title_align: 'center'
+    title_size: self.width/30
+    size_hint: .6, .3
+    BoxLayout:
+        padding: self.height/20
+        spacing: self.width/15
+        orientation: 'vertical'
+        Label:
+            text: "Vous avez perdu !"
+            font_size: self.width/35
+            halign: 'center'
+        BoxLayout
+            padding: self.height/20
+            spacing: self.width/15
+            orientation: 'horizontal'
+            Button:
+                size_hint: .6, .9
+                text: "Rejouer"
+                pos_hint: {'center_x': .5}
+                on_release:
+                    app.root.current = 'facile'
+                    root.dismiss()
+
+            Button:
+                size_hint: .6, .9
+                text: "Menu"
+                pos_hint: {'center_x': .5}
+                on_release:
+                    app.root.current = 'menu'
+                    root.dismiss()
+
+
+<FacileScreen>:
+    name: 'facile'
+    Label:
+        text: 'facile'
+        id: diff_og
+    Image:
+        source: "fond.jpg"
+        allow_stretch: True
+        keep_ratio: False
+    GridLayout:
+        cols: 2
+        rows: 1
+        GridLayout:
+            cols: 10
+            rows: 10
+            padding: self.height/20
+            spacing: self.width/100
+            Button:
+                id: a1
+                text: "A 1"
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "A 2"
+                id: a2
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "A 3"
+                id: a3
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "A 4"
+                id: a4
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "A 5"
+                id: a5
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "A 6"
+                id: a6
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "A 7"
+                id: a7
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "A 8"
+                id: a8
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "A 9"
+                id: a9
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "A 10"
+                id: a10
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+
+            Button:
+                id: b1
+                text: "B 1"
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "B 2"
+                id: b2
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "B 3"
+                id: b3
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "B 4"
+                id: b4
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "B 5"
+                id: b5
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "B 6"
+                id: b6
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "B 7"
+                id: b7
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "B 8"
+                id: b8
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "B 9"
+                id: b9
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "B 10"
+                id: b10
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+
+            Button:
+                id: c1
+                text: "C 1"
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "C 2"
+                id: c2
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "C 3"
+                id: c3
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "C 4"
+                id: c4
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "C 5"
+                id: c5
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "C 6"
+                id: c6
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "C 7"
+                id: c7
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "C 8"
+                id: c8
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "C 9"
+                id: c9
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "C 10"
+                id: c10
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+
+            Button:
+                id: d1
+                text: "D 1"
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "D 2"
+                id: d2
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "D 3"
+                id: d3
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "D 4"
+                id: d4
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "D 5"
+                id: d5
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "D 6"
+                id: d6
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "D 7"
+                id: d7
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "D 8"
+                id: d8
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "D 9"
+                id: d9
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "D 10"
+                id: d10
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+
+            Button:
+                id: e1
+                text: "E 1"
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "E 2"
+                id: e2
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "E 3"
+                id: e3
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "E 4"
+                id: e4
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "E 5"
+                id: e5
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "E 6"
+                id: e6
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "E 7"
+                id: e7
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "E 8"
+                id: e8
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "E 9"
+                id: e9
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "E 10"
+                id: e10
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+
+            Button:
+                id: f1
+                text: "F 1"
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "F 2"
+                id: f2
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "F 3"
+                id: f3
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "F 4"
+                id: f4
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "F 5"
+                id: f5
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "F 6"
+                id: f6
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "F 7"
+                id: f7
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "F 8"
+                id: f8
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "F 9"
+                id: f9
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "F 10"
+                id: f10
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+
+            Button:
+                id: g1
+                text: "G 1"
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "G 2"
+                id: g2
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "G 3"
+                id: g3
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "G 4"
+                id: g4
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "G 5"
+                id: g5
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "G 6"
+                id: g6
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "G 7"
+                id: g7
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "G 8"
+                id: g8
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "G 9"
+                id: g9
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "G 10"
+                id: g10
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+
+            Button:
+                id: h1
+                text: "H 1"
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "H 2"
+                id: h2
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "H 3"
+                id: h3
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "H 4"
+                id: h4
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "H 5"
+                id: h5
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "H 6"
+                id: h6
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "H 7"
+                id: h7
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "H 8"
+                id: h8
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "H 9"
+                id: h9
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "H 10"
+                id: h10
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+
+            Button:
+                id: i1
+                text: "I 1"
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "I 2"
+                id: i2
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "I 3"
+                id: i3
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "I 4"
+                id: i4
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "I 5"
+                id: i5
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "I 6"
+                id: i6
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "I 7"
+                id: i7
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "I 8"
+                id: i8
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "I 9"
+                id: i9
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "I 10"
+                id: i10
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+
+            Button:
+                id: j1
+                text: "J 1"
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "J 2"
+                id: j2
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "J 3"
+                id: j3
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "J 4"
+                id: j4
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "J 5"
+                id: j5
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "J 6"
+                id: j6
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "J 7"
+                id: j7
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "J 8"
+                id: j8
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "J 9"
+                id: j9
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+            Button:
+                text: "J 10"
+                id: j10
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+
+
+        GridLayout:
+            cols: 1
+            rows: 5
+            padding: 20
+            spacing: 20
+            size_hint: .6, 1
+            Label:
+                text: "Placez vos\nnavires"
+                halign: "center"
+                font_size: self.width/15
+                color: 1, 1, 1, .7
+                size_hint: .8, .4
+            Button:
+                id: "aleatoire"
+                text: "Aléatoire"
+                halign: "center"
+                background_color: "#F00000"
+                size_hint: .4, .18
+                font_size: self.width/15
+                on_release: root.placer_aleatoire()
+            GridLayout:
+                cols: 3
+                rows: 3
+                padding: 20
+                spacing: 20
+                Label:
+                    text: ""
+                Button:
+                    id: haut
+                    on_release: root.fleche_haut()
+                    Image:
+                        source: "flechoshaut.png"
+                        allow_stretch: True
+                        keep_ratio: False
+                        size: self.parent.size
+                        pos: self.parent.pos
+                Label:
+                    text: ""
+                Button:
+                    id: gauche
+                    on_release: root.fleche_gauche()
+                    Image:
+                        source: "flechosgauche.png"
+                        allow_stretch: True
+                        keep_ratio: False
+                        size: self.parent.size
+                        pos: self.parent.pos
+                Button:
+                    id: rota
+                    on_release: root.fleche_rota()
+                    Image:
+                        source: "turningarrow.jpg"
+                        allow_stretch: True
+                        keep_ratio: False
+                        size: self.parent.size
+                        pos: self.parent.pos
+                Button:
+                    id: droite
+                    on_release: root.fleche_droite()
+                    Image:
+                        source: "flechosdroite.png"
+                        allow_stretch: True
+                        keep_ratio: False
+                        size: self.parent.size
+                        pos: self.parent.pos
+                Label:
+                    text: ""
+                Button:
+                    id: bas
+                    on_release: root.fleche_bas()
+                    Image:
+                        source: "flechosbas.png"
+                        allow_stretch: True
+                        keep_ratio: False
+                        size: self.parent.size
+                        pos: self.parent.pos
+                Label:
+                    text: ""
+
+            Button:
+                id: etape_btn
+                text: "Commencer"
+                size_hint: .4, .2
+                font_size: self.width/15
+                on_press: root.effet_valide() if self.text == "Jouer" else None
+                on_release:
+                    app.root.current = 'jeu' if self.text == " Jouer " else root.next_bateau()
+
+            Button:
+                text: "Retour"
+                size_hint: .4, .2
+                font_size: self.width/15
+                on_release:
+                    app.root.current = 'choix'
+                    app.root.transition.direction = 'right'
+
+
+<Exo2Screen>:
+    name: 'jeu'
+    Label:
+        text: 'zob'
+        id: diff
+    Image:
+        source: "fond.jpg"
+        allow_stretch: True
+        keep_ratio: False
+    GridLayout:
+        cols: 2
+        rows: 1
+        GridLayout:
+            cols: 10
+            rows: 10
+            padding: self.height/20
+            spacing: self.width/100
+            Button:
+                id: a1
+                text: "A 1"
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "A 2"
+                id: a2
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "A 3"
+                id: a3
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "A 4"
+                id: a4
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "A 5"
+                id: a5
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "A 6"
+                id: a6
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "A 7"
+                id: a7
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "A 8"
+                id: a8
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "A 9"
+                id: a9
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "A 10"
+                id: a10
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+
+            Button:
+                id: b1
+                text: "B 1"
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "B 2"
+                id: b2
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "B 3"
+                id: b3
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "B 4"
+                id: b4
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "B 5"
+                id: b5
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "B 6"
+                id: b6
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "B 7"
+                id: b7
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "B 8"
+                id: b8
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "B 9"
+                id: b9
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "B 10"
+                id: b10
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+
+            Button:
+                id: c1
+                text: "C 1"
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "C 2"
+                id: c2
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "C 3"
+                id: c3
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "C 4"
+                id: c4
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "C 5"
+                id: c5
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "C 6"
+                id: c6
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "C 7"
+                id: c7
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "C 8"
+                id: c8
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "C 9"
+                id: c9
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "C 10"
+                id: c10
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+
+            Button:
+                id: d1
+                text: "D 1"
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "D 2"
+                id: d2
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "D 3"
+                id: d3
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "D 4"
+                id: d4
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "D 5"
+                id: d5
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "D 6"
+                id: d6
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "D 7"
+                id: d7
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "D 8"
+                id: d8
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "D 9"
+                id: d9
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "D 10"
+                id: d10
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+
+            Button:
+                id: e1
+                text: "E 1"
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "E 2"
+                id: e2
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "E 3"
+                id: e3
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "E 4"
+                id: e4
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "E 5"
+                id: e5
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "E 6"
+                id: e6
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "E 7"
+                id: e7
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "E 8"
+                id: e8
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "E 9"
+                id: e9
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "E 10"
+                id: e10
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+
+            Button:
+                id: f1
+                text: "F 1"
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "F 2"
+                id: f2
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "F 3"
+                id: f3
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "F 4"
+                id: f4
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "F 5"
+                id: f5
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "F 6"
+                id: f6
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "F 7"
+                id: f7
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "F 8"
+                id: f8
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "F 9"
+                id: f9
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "F 10"
+                id: f10
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+
+            Button:
+                id: g1
+                text: "G 1"
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "G 2"
+                id: g2
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "G 3"
+                id: g3
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "G 4"
+                id: g4
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "G 5"
+                id: g5
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "G 6"
+                id: g6
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "G 7"
+                id: g7
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "G 8"
+                id: g8
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "G 9"
+                id: g9
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "G 10"
+                id: g10
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+
+            Button:
+                id: h1
+                text: "H 1"
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "H 2"
+                id: h2
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "H 3"
+                id: h3
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "H 4"
+                id: h4
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "H 5"
+                id: h5
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "H 6"
+                id: h6
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "H 7"
+                id: h7
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "H 8"
+                id: h8
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "H 9"
+                id: h9
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "H 10"
+                id: h10
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+
+            Button:
+                id: i1
+                text: "I 1"
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "I 2"
+                id: i2
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "I 3"
+                id: i3
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "I 4"
+                id: i4
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "I 5"
+                id: i5
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "I 6"
+                id: i6
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "I 7"
+                id: i7
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "I 8"
+                id: i8
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "I 9"
+                id: i9
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "I 10"
+                id: i10
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+
+            Button:
+                id: j1
+                text: "J 1"
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "J 2"
+                id: j2
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "J 3"
+                id: j3
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "J 4"
+                id: j4
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "J 5"
+                id: j5
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "J 6"
+                id: j6
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "J 7"
+                id: j7
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "J 8"
+                id: j8
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "J 9"
+                id: j9
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+            Button:
+                text: "J 10"
+                id: j10
+                halign: "center"
+                background_color: 0, 0, 0, .5
+                size_hint: .7, .1
+                font_size: self.width/8
+                on_release: root.appui_bouton(self)
+
+
+        GridLayout:
+            cols: 1
+            rows: 5
+            padding: 20
+            spacing: 20
+            size_hint: .6, 1
+            GridLayout:
+                cols: 10
+                rows: 10
+                padding: self.height/20
+                spacing: self.width/100
+                Button:
+                    id: za1
+                    text: "A 1"
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "A 2"
+                    id: za2
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "A 3"
+                    id: za3
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "A 4"
+                    id: za4
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "A 5"
+                    id: za5
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "A 6"
+                    id: za6
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "A 7"
+                    id: za7
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "A 8"
+                    id: za8
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "A 9"
+                    id: za9
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "A 10"
+                    id: za10
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+    
+                Button:
+                    id: zb1
+                    text: "B 1"
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "B 2"
+                    id: zb2
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "B 3"
+                    id: zb3
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "B 4"
+                    id: zb4
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "B 5"
+                    id: zb5
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "B 6"
+                    id: zb6
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "B 7"
+                    id: zb7
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "B 8"
+                    id: zb8
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "B 9"
+                    id: zb9
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "B 10"
+                    id: zb10
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+    
+                Button:
+                    id: zc1
+                    text: "C 1"
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "C 2"
+                    id: zc2
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "C 3"
+                    id: zc3
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "C 4"
+                    id: zc4
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "C 5"
+                    id: zc5
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "C 6"
+                    id: zc6
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "C 7"
+                    id: zc7
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "C 8"
+                    id: zc8
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "C 9"
+                    id: zc9
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "C 10"
+                    id: zc10
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+    
+                Button:
+                    id: zd1
+                    text: "D 1"
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "D 2"
+                    id: zd2
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "D 3"
+                    id: zd3
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "D 4"
+                    id: zd4
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "D 5"
+                    id: zd5
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "D 6"
+                    id: zd6
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "D 7"
+                    id: zd7
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "D 8"
+                    id: zd8
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "D 9"
+                    id: zd9
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "D 10"
+                    id: zd10
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+    
+                Button:
+                    id: ze1
+                    text: "E 1"
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "E 2"
+                    id: ze2
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "E 3"
+                    id: ze3
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "E 4"
+                    id: ze4
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "E 5"
+                    id: ze5
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "E 6"
+                    id: ze6
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "E 7"
+                    id: ze7
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "E 8"
+                    id: ze8
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "E 9"
+                    id: ze9
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "E 10"
+                    id: ze10
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+    
+                Button:
+                    id: zf1
+                    text: "F 1"
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "F 2"
+                    id: zf2
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "F 3"
+                    id: zf3
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "F 4"
+                    id: zf4
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "F 5"
+                    id: zf5
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "F 6"
+                    id: zf6
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "F 7"
+                    id: zf7
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "F 8"
+                    id: zf8
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "F 9"
+                    id: zf9
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "F 10"
+                    id: zf10
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+    
+                Button:
+                    id: zg1
+                    text: "G 1"
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "G 2"
+                    id: zg2
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "G 3"
+                    id: zg3
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "G 4"
+                    id: zg4
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "G 5"
+                    id: zg5
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "G 6"
+                    id: zg6
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "G 7"
+                    id: zg7
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "G 8"
+                    id: zg8
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "G 9"
+                    id: zg9
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "G 10"
+                    id: zg10
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+    
+                Button:
+                    id: zh1
+                    text: "H 1"
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "H 2"
+                    id: zh2
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "H 3"
+                    id: zh3
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "H 4"
+                    id: zh4
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "H 5"
+                    id: zh5
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "H 6"
+                    id: zh6
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "H 7"
+                    id: zh7
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "H 8"
+                    id: zh8
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "H 9"
+                    id: zh9
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "H 10"
+                    id: zh10
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+    
+                Button:
+                    id: zi1
+                    text: "I 1"
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "I 2"
+                    id: zi2
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "I 3"
+                    id: zi3
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "I 4"
+                    id: zi4
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "I 5"
+                    id: zi5
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "I 6"
+                    id: zi6
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "I 7"
+                    id: zi7
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "I 8"
+                    id: zi8
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "I 9"
+                    id: zi9
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "I 10"
+                    id: zi10
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+    
+                Button:
+                    id: zj1
+                    text: "J 1"
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "J 2"
+                    id: zj2
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "J 3"
+                    id: zj3
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "J 4"
+                    id: zj4
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "J 5"
+                    id: zj5
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "J 6"
+                    id: zj6
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "J 7"
+                    id: zj7
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "J 8"
+                    id: zj8
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "J 9"
+                    id: zj9
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+                Button:
+                    text: "J 10"
+                    id: zj10
+                    halign: "center"
+                    background_color: 0, 0, 0, .5
+                    size_hint: .7, .1
+                    font_size: self.width/8
+                    disabled: True
+                    background_disabled_normal: self.background_normal
+
+            Label:
+                id: lbl
+                text: ""
+                size_hint: 1, .3
+            Button:
+                id: valid
+                text: "Attaquer"
+
+                size_hint: .4, .2
+                font_size: self.width/15
+                on_release: root.faire_lattaque()
+            Button:
+                id: aban
+                text: "Abandonner"
+                size_hint: .4, .2
+                font_size: self.width/15
+                on_release: Factory.Abandon().open()
